@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Consultar Saldo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<!-- Header com Logout -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h2>Consultar Saldo da Conta</h2>
+    <!-- Exibir erro se existir -->
+    <div th:if="${error}">
+        <p class="error" th:text="${error}">Conta não encontrada</p>
+    </div>
+    <!-- Exibir saldo se existir -->
+    <div th:if="${balance}">
+        <p>Saldo da conta <b th:text="${accountNumber}">ACCxxxx</b>:
+            <b th:text="${balance}">0.00</b>
+        </p>
+    </div>
+    <!-- Formulário para digitar número da conta -->
+    <form th:action="@{/user/balance}" method="post">
+        <div>
+            <label>Número da Conta:</label>
+            <input type="text" name="accountNumber" th:value="${accountNumber}" required />
+        </div>
+        <button type="submit">Consultar</button>
+    </form>
+
+    <a th:href="@{/user/transactions}">Voltar às Operações</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Extrato de Transações</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<!-- Header com Logout -->
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h2>Extrato de Transações</h2>
+    <!-- Exibir erro se existir -->
+    <div th:if="${error}">
+        <p class="error" th:text="${error}">Erro ao obter extrato</p>
+    </div>
+    <!-- Exibir tabela de transações se houver lista -->
+    <div th:if="${transactions}">
+        <p>Extrato da conta <b th:text="${accountNumber}">ACCxxx</b>:</p>
+        <table>
+            <thead>
+            <tr>
+                <th>Data/Hora</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Conta Origem</th>
+                <th>Conta Destino</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tx : ${transactions}">
+                <td th:text="${#temporals.format(tx.timestamp, 'dd/MM/yyyy HH:mm:ss')}">01/01/2025 10:00:00</td>
+                <td th:text="${tx.type}">TRANSFER</td>
+                <td th:text="${tx.amount}">100.00</td>
+                <td th:text="${tx.sourceAccount != null ? tx.sourceAccount.accountNumber : '-'}">ACC1001</td>
+                <td th:text="${tx.destinationAccount != null ? tx.destinationAccount.accountNumber : '-'}">ACC1002</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulário para digitar número da conta -->
+    <form th:action="@{/user/statement}" method="post">
+        <div>
+            <label>Número da Conta:</label>
+            <input type="text" name="accountNumber" th:value="${accountNumber}" required />
+        </div>
+        <button type="submit">Ver Extrato</button>
+    </form>
+
+    <a th:href="@{/user/transactions}">Voltar às Operações</a>
+</div>
+</body>
+</html>

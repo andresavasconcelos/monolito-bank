@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transferência</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <h2>Transferir Entre Contas</h2>
+
+    <form th:action="@{/user/transfer}" th:object="${transactionDto}" method="post">
+        <div>
+            <label>Conta Origem:</label>
+            <input type="text" th:field="*{accountNumber}" />
+        </div>
+        <div>
+            <label>Conta Destino:</label>
+            <input type="text" th:field="*{destinationAccountNumber}" />
+        </div>
+        <div>
+            <label>Valor:</label>
+            <input type="number" step="0.01" th:field="*{amount}" />
+        </div>
+
+        <div th:if="${message}">
+            <p class="success" th:text="${message}">Transferência realizada</p>
+        </div>
+        <div th:if="${error}">
+            <p class="error" th:text="${error}">Ocorreu erro</p>
+        </div>
+
+        <button type="submit">Transferir</button>
+    </form>
+
+    <a th:href="@{/user/transactions}">Voltar</a>
+</div>
+</body>
+</html>

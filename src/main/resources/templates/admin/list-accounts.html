@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Contas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div class="container">
+    <h2>Contas Bancárias</h2>
+    <a th:href="@{/admin/accounts/new}">Criar Nova Conta</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titular</th>
+            <th>Número da Conta</th>
+            <th>Saldo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="acc : ${accounts}">
+            <td th:text="${acc.id}">1</td>
+            <td th:text="${acc.ownerName}">Titular</td>
+            <td th:text="${acc.accountNumber}">123456</td>
+            <td th:text="${acc.balance}">0.00</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
