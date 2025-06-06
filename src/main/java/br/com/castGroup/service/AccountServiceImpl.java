@@ -41,7 +41,6 @@ public class AccountServiceImpl {
         acc.setBalance(acc.getBalance().add(amount));
         Account updated = accountRepository.save(acc);
 
-        // Registrar transação de crédito (sourceAccount = null, destinationAccount = acc)
         Transaction tx = new Transaction(
                 null,
                 updated,
@@ -67,7 +66,6 @@ public class AccountServiceImpl {
         acc.setBalance(acc.getBalance().subtract(amount));
         Account updated = accountRepository.save(acc);
 
-        // Registrar transação de débito (sourceAccount = acc, destinationAccount = null)
         Transaction tx = new Transaction(
                 updated,
                 null,

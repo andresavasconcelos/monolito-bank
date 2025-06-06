@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <div class="container">
     <h2>Contas Bancárias</h2>
     <a th:href="@{/admin/accounts/new}">Criar Nova Conta</a>

@@ -12,25 +12,20 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Conta de origem (pode ser nula em caso de crédito externo)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_account_id")
     private Account sourceAccount;
 
-    // Conta de destino (pode ser nula em caso de débito para fora)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destination_account_id")
     private Account destinationAccount;
 
-    // Valor da operação
     @Column(nullable = false)
     private BigDecimal amount;
 
-    // Tipo: “CREDIT”, “DEBIT” ou “TRANSFER”
     @Column(nullable = false, length = 10)
     private String type;
 
-    // Data e hora da transação
     @Column(nullable = false)
     private LocalDateTime timestamp;
 

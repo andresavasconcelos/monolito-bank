@@ -22,9 +22,7 @@ public class UserController {
         this.accountService = accountService;
     }
 
-    /**
-     * Formulário para crédito/débito.
-     */
+
     @GetMapping("/transactions")
     public String showTransactionForm(Model model) {
         model.addAttribute("transactionDto", new TransactionDto());
@@ -84,13 +82,8 @@ public class UserController {
         return "user/transfer";
     }
 
-    /**
-     * Rota para exibir saldo da conta.
-     * Supondo que o usuário informe o número de conta manualmente.
-     */
     @GetMapping("/balance")
     public String showBalanceForm(Model model) {
-        // DTO simples com apenas accountNumber e sem valor
         model.addAttribute("accountNumber", "");
         return "user/balance";
     }
@@ -108,9 +101,6 @@ public class UserController {
         return "user/balance";
     }
 
-    /**
-     * Rota para exibir extrato de transações de uma conta.
-     */
     @GetMapping("/statement")
     public String showStatementForm(Model model) {
         model.addAttribute("accountNumber", "");

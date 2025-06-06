@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <div class="container">
     <h2>Criar Nova Conta</h2>
     <form th:action="@{/admin/accounts}" th:object="${accountDto}" method="post">
@@ -22,6 +23,7 @@
         </div>
         <button type="submit">Criar</button>
     </form>
+    <br>
     <a th:href="@{/admin/accounts}">Voltar</a>
 </div>
 </body>

@@ -14,11 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    /**
-     * Definição de usuários em memória:
-     * - admin / admin123 → ROLE_ADMIN
-     * - user / user123   → ROLE_USER
-     */
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.withUsername("admin")
@@ -43,13 +38,6 @@ public class SecurityConfig {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
-    /**
-     * Configurações de autorização:
-     * - /admin/**   → apenas ROLE_ADMIN
-     * - /user/**    → ROLE_USER ou ROLE_ADMIN
-     * - restante    → exige autenticação
-     * - página de login customizada em /login
-     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
